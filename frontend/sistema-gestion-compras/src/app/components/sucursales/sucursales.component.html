@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Ubicaciones</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="sucursales.component.css">
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h2 class="text-center">Gestión de Ubicaciones Cliente/Usuario</h2>
+
+        <!-- Botones de navegación -->
+        <div class="d-flex justify-content-center my-3">
+            <button class="btn btn-primary me-2" id="btn-sucursales">Sucursales</button>
+            <button class="btn btn-secondary" id="btn-clientes">Clientes</button>
+        </div>
+
+        <!-- Tabla de Sucursales -->
+        <div id="sucursales-section" class="d-none">
+            <h4>Lista de Sucursales</h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Sucursal</th>
+                        <th>Dirección</th>
+                        <th>Ciudad</th>
+                        <th>Teléfono</th>
+                        <th>Mapa</th>
+                    </tr>
+                </thead>
+                <tbody id="sucursales-body">
+                    <!-- Datos dinámicos aquí -->
+                </tbody>
+            </table>
+            <div class="mt-3">
+                <h5>Agregar Nueva Sucursal</h5>
+                <form>
+                    <div class="mb-3">
+                        <label for="nombre-sucursal" class="form-label">Nombre de la sucursal</label>
+                        <input type="text" class="form-control" id="nombre-sucursal">
+                    </div>
+                    <div class="mb-3">
+                        <label for="direccion-sucursal" class="form-label">Dirección completa</label>
+                        <input type="text" class="form-control" id="direccion-sucursal">
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono-sucursal" class="form-label">Teléfono</label>
+                        <input type="text" class="form-control" id="telefono-sucursal">
+                    </div>
+                    <div class="mb-3">
+                        <label for="coordenadas-sucursal" class="form-label">Coordenadas GPS</label>
+                        <input type="text" class="form-control" id="coordenadas-sucursal">
+                    </div>
+                    <button type="submit" class="btn btn-success">Agregar Sucursal</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tabla de Clientes -->
+        <div id="clientes-section" class="d-none">
+            <h4>Lista de Clientes</h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Dirección</th>
+                        <th>Ciudad</th>
+                        <th>Teléfono</th>
+                        <th>Mapa</th>
+                    </tr>
+                </thead>
+                <tbody id="clientes-body">
+                    <!-- Datos dinámicos aquí -->
+                </tbody>
+            </table>
+            <div class="mt-3">
+                <h5>Sucursal Más Cercana</h5>
+                <p>Selecciona un cliente para calcular la distancia y mostrar la sucursal más cercana.</p>
+                <button class="btn btn-info">Visualizar en Mapa</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="sucursales.component.js"></script>
+</body>
+
+</html>

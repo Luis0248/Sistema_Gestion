@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Compras</title>
+
+    <!-- Bootstrap CSS desde CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h2 class="text-center">Gestión de Compras del Cliente/Usuario</h2>
+
+        <div class="card p-3">
+            <h5 class="mb-3">Buscar por:</h5>
+            <div class="row g-3">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="ID compra" id="idCompra" />
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Nombre del producto" id="nombreProducto" />
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Fecha de compra" id="fechaCompra" />
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Número de factura" id="numeroFactura" />
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Estado de la compra" id="estadoCompra" />
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary mt-3" onclick="filtrarCompras()">Buscar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive mt-4">
+            <table class="table table-bordered table-striped">
+                <thead class="table-primary text-center">
+                    <tr>
+                        <th>ID de la compra</th>
+                        <th>Nombre producto</th>
+                        <th>Descripción producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio total</th>
+                        <th>Estado compra</th>
+                        <th>Cliente</th>
+                        <th>Método de pago</th>
+                        <th>Número factura</th>
+                    </tr>
+                </thead>
+                <tbody id="comprasTabla">
+                    <!-- Aquí se mostrarán las compras filtradas -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS y dependencias -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Datos de ejemplo
+        const compras = [
+            {
+                idCompra: 1,
+                nombreProducto: "Producto A",
+                descripcion: "Descripción A",
+                cantidad: 2,
+                precioTotal: 100,
+                estadoCompra: "Completada",
+                cliente: "Cliente 1",
+                metodoPago: "Tarjeta",
+                numeroFactura: "12345"
+            },
+            {
+                idCompra: 2,
+                nombreProducto: "Producto B",
+                descripcion: "Descripción B",
+                cantidad: 1,
+                precioTotal: 50,
+                estadoCompra: "Pendiente",
+                cliente: "Cliente 2",
+                metodoPago: "Efectivo",
+                numeroFactura: "12346"
+            }
+            // Más compras aquí...
+        ];
+
+        // Función para filtrar compras
+        function filtrarCompras() {
+            const idCompra = document.getElementById('idCompra').value.toLowerCase();
+            const nombreProducto = document.getElementById('nombreProducto').value.toLowerCase();
+            const fechaCompra = document.getElementById('fechaCompra').value.toLowerCase();
+            const numeroFactura = document.getElementById('numeroFactura').value.toLowerCase();
+            const estadoCompra = document.getElementById('estadoCompra').value.toLowerCase();
+
+            const comprasFiltradas = compras.filter(compra => {
+                return (
+                    (idCompra === '' || compra.idCompra.toString().includes(idCompra)) &&
+                    (nombreProducto === '' || compra.nombreProducto.toLowerCase().includes(nombreProducto)) &&
+                    (fechaCompra === '' || compra.fechaCompra && compra.fechaCompra.toLowerCase().includes(fechaCompra)) &&
+                    (numeroFactura === '' || compra.numeroFactura.toLowerCase().includes(numeroFactura)) &&
+                    (estadoCompra === '' || compra.estadoCompra.toLowerCase().includes(estadoCompra))
+                );
+            });
+
+            mostrarCompras(comprasFiltradas);
+        }
+
+        // Función para mostrar compras en la tabla
+        function mostrarCompras(compras) {
+            const tabla = document.getElementById('comprasTabla');
+            tabla.innerHTML = ''; // Limpiar tabla
+
+            compras.forEach(compra => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+        <td>${compra.idCompra}</td>
+        <td>${compra.nombreProducto}</td>
+        <td>${compra.descripcion}</td>
+        <td>${compra.cantidad}</td>
+        <td>${compra.precioTotal.toFixed(2)}</td>
+        <td>${compra.estadoCompra}</td>
+        <td>${compra.cliente}</td>
+        <td>${compra.metodoPago}</td>
+        <td>${compra.numeroFactura}</td>
+        `;
+                tabla.appendChild(row);
+            });
+        }
+
+        // Inicializar la tabla con todas las compras al cargar la página
+        mostrarCompras(compras);
+    </script>
+</body>
+
+</html>
